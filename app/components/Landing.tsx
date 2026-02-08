@@ -21,13 +21,13 @@ const letterVariant: Variants = {
 
 /* ---------------- PAGE ---------------- */
 
-export default function Page(): JSX.Element {
+export default function Page() {
   useEffect(() => {
     const lenis = new Lenis({
       lerp: 0.08,
     });
 
-    const raf = (time: number): void => {
+    const raf = (time: number) => {
       lenis.raf(time);
       requestAnimationFrame(raf);
     };
@@ -53,10 +53,7 @@ interface AnimatedLineProps {
   startIndex?: number;
 }
 
-function AnimatedLine({
-  text,
-  startIndex = 0,
-}: AnimatedLineProps): JSX.Element {
+function AnimatedLine({ text, startIndex = 0 }: AnimatedLineProps) {
   return (
     <motion.h1 className="flex overflow-hidden">
       {text.split("").map((char, i) => (
@@ -75,7 +72,7 @@ function AnimatedLine({
   );
 }
 
-function Hero(): JSX.Element {
+function Hero() {
   return (
     <section className="h-screen bg-white text-[#212121] flex items-center">
       <div className="lg:px-10 p-5 w-full">
