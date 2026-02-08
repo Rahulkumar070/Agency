@@ -13,10 +13,9 @@ export default function RootLayout({
 }) {
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.04, // smoothness (0.05–0.15 is sweet spot)
-      wheelMultiplier: 1,
-      touchMultiplier: 1.2,
-    });
+      smooth: true,
+      lerp: 0.08,
+    } as unknown as any);
 
     function raf(time: number) {
       lenis.raf(time);
