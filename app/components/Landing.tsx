@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { FaArrowRightLong } from "react-icons/fa6";
 import Lenis from "lenis";
 
 /* ---------------- TEXT ANIMATION ---------------- */
 
-const letterVariant = {
+const letterVariant: Variants = {
   hidden: { y: "110%" },
-  show: (i) => ({
+  show: (i: number) => ({
     y: "0%",
     transition: {
       duration: 0.75,
@@ -21,19 +21,22 @@ const letterVariant = {
 
 /* ---------------- PAGE ---------------- */
 
-export default function Page() {
+export default function Page(): JSX.Element {
   useEffect(() => {
     const lenis = new Lenis({
-      smooth: true,
       lerp: 0.08,
     });
 
-    function raf(time) {
+    const raf = (time: number): void => {
       lenis.raf(time);
       requestAnimationFrame(raf);
-    }
+    };
 
     requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
   }, []);
 
   return (
@@ -45,7 +48,15 @@ export default function Page() {
 
 /* ---------------- HERO SECTION ---------------- */
 
-function AnimatedLine({ text, startIndex = 0 }) {
+interface AnimatedLineProps {
+  text: string;
+  startIndex?: number;
+}
+
+function AnimatedLine({
+  text,
+  startIndex = 0,
+}: AnimatedLineProps): JSX.Element {
   return (
     <motion.h1 className="flex overflow-hidden">
       {text.split("").map((char, i) => (
@@ -64,11 +75,11 @@ function AnimatedLine({ text, startIndex = 0 }) {
   );
 }
 
-function Hero() {
+function Hero(): JSX.Element {
   return (
     <section className="h-screen bg-white text-[#212121] flex items-center">
       <div className="lg:px-10 p-5 w-full">
-        <div className="lg:text-[6vw] text-[clamp(1rem,9vw,10vw)] font-['Boldonse'] font-bold 2xl:leading-56 lg:leading-30">
+        <div className="lg:text-[6vw] text-[clamp(1rem,9vw,10vw)] font-['Boldonse'] font-bold 2xl:leading-[5.6rem] lg:leading-[8rem]">
           <AnimatedLine text="WE CREATE" startIndex={0} />
           <AnimatedLine text="PRESENTATIONS" startIndex={2} />
           <AnimatedLine text="THAT OPEN EYES" startIndex={4} />
